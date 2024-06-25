@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>梅爆死</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000;
+            color: #0f0;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            overflow: hidden;
+        }
+        .container {
+            border: 2px solid #0f0;
+            padding: 20px;
+            box-shadow: 0 0 10px #0f0;
+            background: rgba(0, 0, 0, 0.8);
+        }
+        .title {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .score {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: #0f0;
+            border: none;
+            color: #000;
+            font-size: 20px;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 0 5px #0f0;
+        }
+        .button:hover {
+            background-color: #0a0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">GAME OVER</div>
+        <div class="score">最終スコア: <span id="final-score">0</span></div>
+        <button class="button" onclick="restartGame()">リスタート</button>
+    </div>
+
+    <script>
+        function getFinalScore() {
+            const params = new URLSearchParams(window.location.search);
+            const score = params.get('score') || 0;
+            const time = params.get('time') || 0;
+            const finalScore = parseInt(score) + parseInt(time) * 10;
+            document.getElementById('final-score').innerText = finalScore;
+        }
+
+        function restartGame() {
+            window.location.href = 'start.html';
+        }
+
+        window.onload = getFinalScore;
+    </script>
+</body>
+</html>
